@@ -47,7 +47,7 @@ Deno.serve(async (req) => {
     const { data: profile, error: profileError } = await admin
       .from('users')
       .select('auth_user_id')
-      .ilike('username', normalized)
+      .ilike('username', normalized.replace(/[\\%_]/g, '\\\\$&'))
       .limit(1)
       .maybeSingle()
 
