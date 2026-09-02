@@ -75,7 +75,8 @@ Deno.serve(async (req) => {
       status: 200,
       headers: { 'content-type': 'application/json', 'cache-control': 'no-store' }
     })
-  } catch (_) {
-    return genericFailure()
+  } catch (e) {
+    console.error('login-with-username error:', e instanceof Error ? e.message : String(e))
+    return genericFailure(500)
   }
 })
